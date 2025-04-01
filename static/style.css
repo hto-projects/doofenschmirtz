@@ -13,6 +13,6 @@ body {
 }
 
 .ui {
-    width: calc(30vw - 1.5px);
-    float: right;
+    width: calc(29vw);
+    float: left;
 }

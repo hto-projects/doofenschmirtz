@@ -1,5 +1,5 @@
 let money = 0;
-let peg_rows = 14;
+let peg_rows = 7;
 let plinko_val = 1;
 
 const canvas = document.getElementById("gameboard");
@@ -205,5 +205,5 @@ function draw() {
 }
 
 generate_board(peg_rows);
-setInterval(draw, 5);
+setInterval(draw, 10);
 // setInterval(spawn_plinko, 100);
