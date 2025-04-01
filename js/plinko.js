@@ -1,5 +1,5 @@
 let money = 0;
-let peg_rows = 7;
+let peg_rows = 5;
 let plinko_val = 1;
 
 const canvas = document.getElementById("gameboard");
@@ -31,13 +31,25 @@ class Circle {
 }
 
 const grav = 0.25;
-const friction = 1.6;
+const friction = 1.5;
 class Ball extends Circle {
     constructor(x, y, rad, color, val) {
         super(x, y, rad, color);
         this.val = val;
         this.dy = 0;
         this.dx = (Math.random() * 2 - 1) / 2;
+
+        // get random dx from bounds [-a, -b] or [b, a]
+        // let dx = 0
+        // const a = -.5
+        // if (Math.random() > 0.5) {
+        //     dx = Math.random() + a;
+        // }
+        // else {
+        //     dx = Math.random() - 1 - a;
+        // }
+
+        // this.dx = dx;
     }
 
     step() {
@@ -88,6 +100,7 @@ class Rect {
     }
 }
 
+let money_display = document.getElementById("money_counter");
 class Bucket extends Rect {
     constructor(x, y, w, h, mult, color) {
         super(x, y, w, h, color);
@@ -101,7 +114,8 @@ class Bucket extends Rect {
                 if (index > -1) {
                     dynamic_objects.splice(index, 1);
 
-                    console.log(plinko_val * this.mult);
+                    money += plinko_val * this.mult;
+                    money_display.innerText ="Money: " + money;
                 }
             }
         })
@@ -206,4 +220,4 @@ function draw() {
 
 generate_board(peg_rows);
 setInterval(draw, 10);
-// setInterval(spawn_plinko, 100);
+setInterval(spawn_plinko, 100);
