@@ -175,6 +175,23 @@ function generate_board(rows) {
         buckets.push(bucket);
     }
 
+    const ui = document.getElementsByClassName("ui")[0];
+    const canvas_x_0 = ui.offsetWidth;
+
+    for (let i = 0; i < buckets.length; i++) {
+        let bucket_display = document.createElement("p");
+        bucket_display.classList.add("bucket");
+        bucket_display.width = buckets[i].w;
+        bucket_display.height = buckets[i].h;
+        bucket_display.style.left = canvas_x_0 + buckets[i].x + "px";
+        bucket_display.style.top = buckets[i].y + "px";
+        bucket_display.style.width = buckets[i].w + "px";
+        bucket_display.style.height = buckets[i].w + "px";
+        bucket_display.innerText = buckets[i].mult;
+        document.body.appendChild(bucket_display);
+    }
+
+
     // static_objects = static_objects.concat(bucket_borders); //! if performace becomes an issue moving this to its own array to save collision detection is a free optimization
 }
 
