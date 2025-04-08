@@ -1,5 +1,5 @@
 let money = 0;
-let peg_rows = 5;
+let peg_rows = 13;
 let plinko_val = 1;
 
 const canvas = document.getElementById("gameboard");
@@ -181,13 +181,18 @@ function generate_board(rows) {
     for (let i = 0; i < buckets.length; i++) {
         let bucket_display = document.createElement("p");
         bucket_display.classList.add("bucket");
+        // bucket_display.classList.add("bucket_mult_" + buckets[i].mult)
+        let yellow = 200 - (20 * Math.log2(buckets[i].mult));
+        bucket_display.style.backgroundColor = `rgb(255, ${yellow}, 55)`;
+        console.log(200 - (20 * Math.log2(buckets[i].mult)))
         bucket_display.width = buckets[i].w;
         bucket_display.height = buckets[i].h;
         bucket_display.style.left = canvas_x_0 + buckets[i].x + "px";
         bucket_display.style.top = buckets[i].y + "px";
         bucket_display.style.width = buckets[i].w + "px";
-        bucket_display.style.height = buckets[i].w + "px";
-        bucket_display.innerText = buckets[i].mult;
+        bucket_display.style.padding = buckets[i].w / 4 + "px" + " 0";
+        // bucket_display.style.height = buckets[i].w + "px";
+        bucket_display.innerText = buckets[i].mult + "x";
         document.body.appendChild(bucket_display);
     }
 

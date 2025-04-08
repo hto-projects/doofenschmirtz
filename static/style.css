@@ -18,7 +18,7 @@ body {
 }
 
 .bucket {
-    background-color: orange;
+    /* background-color: orange; */
     position: absolute; 
     border-radius: 10px;
     text-align: center;
