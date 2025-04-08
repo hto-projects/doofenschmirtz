@@ -1,5 +1,5 @@
 let money = 0;
-let peg_rows = 7;
+let peg_rows = 5;
 let plinko_val = 1;
 
 const canvas = document.getElementById("gameboard");
@@ -31,7 +31,7 @@ class Circle {
 }
 
 const grav = 0.25;
-const friction = 1.6;
+const friction = 1.5;
 class Ball extends Circle {
     constructor(x, y, rad, color, val) {
         super(x, y, rad, color);
@@ -88,6 +88,7 @@ class Rect {
     }
 }
 
+let money_display = document.getElementById("money_counter");
 class Bucket extends Rect {
     constructor(x, y, w, h, mult, color) {
         super(x, y, w, h, color);
@@ -101,7 +102,8 @@ class Bucket extends Rect {
                 if (index > -1) {
                     dynamic_objects.splice(index, 1);
 
-                    console.log(plinko_val * this.mult);
+                    money += plinko_val * this.mult;
+                    money_display.innerText ="Money: " + money;
                 }
             }
         })
@@ -126,13 +128,13 @@ function generate_board(rows) {
         }
     }
 
-    const bucket_height = 25;
+    const bucket_height = 40;
     const border_width = 5;
 
     bucket_borders = [];
     bottom_row = static_objects.slice(static_objects.length - rows - 2, static_objects.length);
     bottom_row.forEach((peg) => {
-        let rect = new Rect(peg.x - border_width / 2, peg.y + 15, border_width, 25, "black");
+        let rect = new Rect(peg.x - border_width / 2, peg.y + 15, border_width, bucket_height, "black");
         bucket_borders.push(rect);
     })
 
@@ -173,7 +175,7 @@ function generate_board(rows) {
         buckets.push(bucket);
     }
 
-    static_objects = static_objects.concat(bucket_borders); //! if performace becomes an issue moving this to its own array to save collision detection is a free optimization
+    // static_objects = static_objects.concat(bucket_borders); //! if performace becomes an issue moving this to its own array to save collision detection is a free optimization
 }
 
 const ball_rad = 9;
@@ -199,11 +201,11 @@ function draw() {
     })
 
     buckets.forEach((bucket) => {
-        bucket.draw();
+        // bucket.draw(); // hide hitboxes on boxes to make a prettier ui
         bucket.detect_plinko(dynamic_objects);
     })
 }
 
 generate_board(peg_rows);
 setInterval(draw, 10);
-// setInterval(spawn_plinko, 100);
+setInterval(spawn_plinko, 100);
