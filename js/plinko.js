@@ -38,18 +38,6 @@ class Ball extends Circle {
         this.val = val;
         this.dy = 0;
         this.dx = (Math.random() * 2 - 1) / 2;
-
-        // get random dx from bounds [-a, -b] or [b, a]
-        // let dx = 0
-        // const a = -.5
-        // if (Math.random() > 0.5) {
-        //     dx = Math.random() + a;
-        // }
-        // else {
-        //     dx = Math.random() - 1 - a;
-        // }
-
-        // this.dx = dx;
     }
 
     step() {
@@ -140,13 +128,13 @@ function generate_board(rows) {
         }
     }
 
-    const bucket_height = 25;
+    const bucket_height = 40;
     const border_width = 5;
 
     bucket_borders = [];
     bottom_row = static_objects.slice(static_objects.length - rows - 2, static_objects.length);
     bottom_row.forEach((peg) => {
-        let rect = new Rect(peg.x - border_width / 2, peg.y + 15, border_width, 25, "black");
+        let rect = new Rect(peg.x - border_width / 2, peg.y + 15, border_width, bucket_height, "black");
         bucket_borders.push(rect);
     })
 
@@ -187,7 +175,7 @@ function generate_board(rows) {
         buckets.push(bucket);
     }
 
-    static_objects = static_objects.concat(bucket_borders); //! if performace becomes an issue moving this to its own array to save collision detection is a free optimization
+    // static_objects = static_objects.concat(bucket_borders); //! if performace becomes an issue moving this to its own array to save collision detection is a free optimization
 }
 
 const ball_rad = 9;
@@ -213,7 +201,7 @@ function draw() {
     })
 
     buckets.forEach((bucket) => {
-        bucket.draw();
+        // bucket.draw(); // hide hitboxes on boxes to make a prettier ui
         bucket.detect_plinko(dynamic_objects);
     })
 }
