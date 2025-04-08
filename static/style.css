@@ -5,7 +5,7 @@
 
 body {
     display: inline;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
 
 #gameboard {
@@ -15,4 +15,11 @@ body {
 .ui {
     width: calc(29vw);
     float: left;
+}
+
+.bucket {
+    background-color: orange;
+    position: absolute; 
+    border-radius: 10px;
+    text-align: center;
 }
