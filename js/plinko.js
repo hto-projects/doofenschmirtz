@@ -1,5 +1,5 @@
 let money = 0;
-let peg_rows = 13;
+let peg_rows = 3;
 let plinko_val = 1;
 
 const canvas = document.getElementById("gameboard");
@@ -8,7 +8,7 @@ canvas.setAttribute("height", window.innerHeight);
 const ctx = canvas.getContext("2d");
 
 // in order to draw all objects later
-let static_objects = []; 
+let static_objects = [];
 let dynamic_objects = [];
 let buckets = [];
 
@@ -103,7 +103,7 @@ class Bucket extends Rect {
                     dynamic_objects.splice(index, 1);
 
                     money += plinko_val * this.mult;
-                    money_display.innerText ="Money: " + money;
+                    money_display.innerText = "Money: " + money;
                 }
             }
         })
@@ -116,12 +116,14 @@ const peg_rad = 2.5;
 // const plinko_board_y = 250;
 const canvas_center_y = canvas.height / 2;
 const canvas_center_x = canvas.width / 2;
+
+const bucket_container = document.getElementById("bucket_container");
 function generate_board(rows) {
     for (let i = 0; i < rows; i++) {
         const num_pegs = i + 3;
         const xstart = ((num_pegs - 1) / 2 * (peg_xgap + peg_rad)) * -1 + canvas_center_x;
         const ystart = canvas_center_y - rows * peg_ygap / 2;
-        
+
         for (let j = 0; j < num_pegs; j++) {
             let circle = new Circle(xstart + (j * peg_xgap) + peg_rad * j, ystart + i * peg_ygap, peg_rad, "black");
             static_objects.push(circle);
@@ -138,7 +140,7 @@ function generate_board(rows) {
         bucket_borders.push(rect);
     })
 
-    const default_mult = 1;
+    const default_mult = 0.5;
     let mults = new Array(bucket_borders.length - 1);
     let center = Math.round((mults.length - 1) / 2); // even arrays takes the "center" on the right
     if (mults.length % 2 == 0) {
@@ -152,7 +154,7 @@ function generate_board(rows) {
         mults[center + 1] = default_mult;
         mults[center - 1] = default_mult;
     }
-    
+
     let index = 2;
     while (center + index < mults.length) {
         mults[center + index] = mults[center + index - 1] * 2;
@@ -168,7 +170,7 @@ function generate_board(rows) {
     for (let i = 0; i < bucket_borders.length - 1; i++) {
         x = bucket_borders[i].x + border_width;
         y = bucket_borders[i].y;
-        w = bucket_borders[i+1].x - bucket_borders[i].x - border_width;
+        w = bucket_borders[i + 1].x - bucket_borders[i].x - border_width;
         h = bucket_height;
 
         let bucket = new Bucket(x, y, w, h, mults[i], "orange");
@@ -176,7 +178,7 @@ function generate_board(rows) {
     }
 
     const ui = document.getElementsByClassName("ui")[0];
-    const canvas_x_0 = ui.offsetWidth;
+    const canvas_x_0 = ui.offsetWidth + 15;
 
     for (let i = 0; i < buckets.length; i++) {
         let bucket_display = document.createElement("p");
@@ -184,16 +186,20 @@ function generate_board(rows) {
         // bucket_display.classList.add("bucket_mult_" + buckets[i].mult)
         let yellow = 200 - (20 * Math.log2(buckets[i].mult));
         bucket_display.style.backgroundColor = `rgb(255, ${yellow}, 55)`;
-        console.log(200 - (20 * Math.log2(buckets[i].mult)))
-        bucket_display.width = buckets[i].w;
-        bucket_display.height = buckets[i].h;
+        // bucket_display.width = buckets[i].w;
+        // bucket_display.height = buckets[i].h;
+        // bucket_display.style.left = canvas_x_0 + buckets[i].x + "px";
+        // bucket_display.style.top = buckets[i].y + "px";
+        // bucket_display.style.paddingRight = buckets[i].w + "px";
+        // bucket_display.style.paddingBottom = buckets[i].w + "px";
         bucket_display.style.left = canvas_x_0 + buckets[i].x + "px";
         bucket_display.style.top = buckets[i].y + "px";
         bucket_display.style.width = buckets[i].w + "px";
         bucket_display.style.padding = buckets[i].w / 4 + "px" + " 0";
-        // bucket_display.style.height = buckets[i].w + "px";
+        bucket_display.style.height = buckets[i].h / 2 + "px";
         bucket_display.innerText = buckets[i].mult + "x";
-        document.body.appendChild(bucket_display);
+        // document.body.appendChild(bucket_display);
+        bucket_container.appendChild(bucket_display);
     }
 
 

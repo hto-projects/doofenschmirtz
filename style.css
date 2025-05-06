@@ -5,11 +5,14 @@
 
 body {
     display: inline;
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
 }
 
 #gameboard {
     border: solid 1px black;
+    position: absolute;
+    right: 0px;
+    top: 0px;
 }
 
 .ui {

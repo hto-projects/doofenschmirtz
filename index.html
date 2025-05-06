@@ -8,11 +8,18 @@
 </head>
 <body>
     <canvas id="gameboard"></canvas>
+    <span id="bucket_container"></span>
     <div class="ui">
         <h2 id="money_counter">Money: </h2>
         <button onclick="spawn_plinko()">Spawn plinko</button>
+        <div class="upgrades">
+            <button onclick="add_row()">Add Row</button>
+            <button>Increase Ball Value</button>
+        </div>
     </div>
+
+    <script src="../js/upgrades.js"></script>
     <script src="../js/plinko.js"></script>
-    <script src="../js/ui.js"></script>
+    <!-- <script src="../js/ui.js"></script> -->
 </body>
 </html>
