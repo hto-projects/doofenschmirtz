@@ -1,6 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
+    border: solid 1px red;
 }
 
 body {
@@ -25,4 +26,8 @@ body {
     position: absolute; 
     border-radius: 10px;
     text-align: center;
+}
+
+.upgrade-price-tag, .upgrade-button {
+    display: inline;
 }
