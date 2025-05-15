@@ -88,6 +88,10 @@ class Rect {
     }
 }
 
+function update_money_display(newamount) {
+    money_display.innerText = "Money: " + money;
+}
+
 let money_display = document.getElementById("money_counter");
 class Bucket extends Rect {
     constructor(x, y, w, h, mult, color) {
@@ -103,7 +107,7 @@ class Bucket extends Rect {
                     dynamic_objects.splice(index, 1);
 
                     money += plinko_val * this.mult;
-                    money_display.innerText = "Money: " + money;
+                    update_money_display(money);
                 }
             }
         })
@@ -117,6 +121,7 @@ const peg_rad = 2.5;
 const canvas_center_y = canvas.height / 2;
 const canvas_center_x = canvas.width / 2;
 
+let base_bucket_multiplier = 0.5;
 const bucket_container = document.getElementById("bucket_container");
 function generate_board(rows) {
     for (let i = 0; i < rows; i++) {
@@ -140,19 +145,18 @@ function generate_board(rows) {
         bucket_borders.push(rect);
     })
 
-    const default_mult = 0.5;
     let mults = new Array(bucket_borders.length - 1);
     let center = Math.round((mults.length - 1) / 2); // even arrays takes the "center" on the right
     if (mults.length % 2 == 0) {
-        mults[center - 1] = default_mult;
-        mults[center - 2] = default_mult;
-        mults[center] = default_mult;
-        mults[center + 1] = default_mult;
+        mults[center - 1] = base_bucket_multiplier;
+        mults[center - 2] = base_bucket_multiplier;
+        mults[center] = base_bucket_multiplier;
+        mults[center + 1] = base_bucket_multiplier;
     }
     else {
-        mults[center] = default_mult;
-        mults[center + 1] = default_mult;
-        mults[center - 1] = default_mult;
+        mults[center] = base_bucket_multiplier;
+        mults[center + 1] = base_bucket_multiplier;
+        mults[center - 1] = base_bucket_multiplier;
     }
 
     let index = 2;
@@ -184,14 +188,8 @@ function generate_board(rows) {
         let bucket_display = document.createElement("p");
         bucket_display.classList.add("bucket");
         // bucket_display.classList.add("bucket_mult_" + buckets[i].mult)
-        let yellow = 200 - (20 * Math.log2(buckets[i].mult));
+        let yellow = 200 - (20 * Math.log2(buckets[i].mult / base_bucket_multiplier));
         bucket_display.style.backgroundColor = `rgb(255, ${yellow}, 55)`;
-        // bucket_display.width = buckets[i].w;
-        // bucket_display.height = buckets[i].h;
-        // bucket_display.style.left = canvas_x_0 + buckets[i].x + "px";
-        // bucket_display.style.top = buckets[i].y + "px";
-        // bucket_display.style.paddingRight = buckets[i].w + "px";
-        // bucket_display.style.paddingBottom = buckets[i].w + "px";
         bucket_display.style.left = canvas_x_0 + buckets[i].x + "px";
         bucket_display.style.top = buckets[i].y + "px";
         bucket_display.style.width = buckets[i].w + "px";
