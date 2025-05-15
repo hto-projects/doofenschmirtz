@@ -1,7 +1,6 @@
 * {
     margin: 0px;
     padding: 0px;
-    border: solid 1px red;
 }
 
 body {
@@ -28,6 +27,6 @@ body {
     text-align: center;
 }
 
-.upgrade-price-tag, .upgrade-button {
+.inline {  
     display: inline;
 }

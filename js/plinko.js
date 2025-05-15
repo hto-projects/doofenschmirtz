@@ -88,7 +88,7 @@ class Rect {
     }
 }
 
-function update_money_display(newamount) {
+function update_money_display() {
     money_display.innerText = "Money: " + money;
 }
 
@@ -199,9 +199,6 @@ function generate_board(rows) {
         // document.body.appendChild(bucket_display);
         bucket_container.appendChild(bucket_display);
     }
-
-
-    // static_objects = static_objects.concat(bucket_borders); //! if performace becomes an issue moving this to its own array to save collision detection is a free optimization
 }
 
 const ball_rad = 9;
