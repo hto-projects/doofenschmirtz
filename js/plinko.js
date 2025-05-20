@@ -202,7 +202,7 @@ function generate_board(rows) {
 }
 
 const ball_rad = 9;
-const spawn_plinko = function() {
+function spawn_plinko() {
     const y = canvas_center_y - peg_rows * peg_ygap / 2 - 50;
     const x = canvas_center_x + (Math.random() * 2 - 1) * peg_xgap * .8;
     let ball = new Ball(x, y, ball_rad, "red", plinko_val);
@@ -231,4 +231,4 @@ function draw() {
 
 generate_board(peg_rows);
 setInterval(draw, 10);
-setInterval(spawn_plinko, 100);
+// setInterval(spawn_plinko, 100);

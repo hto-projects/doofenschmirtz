@@ -30,3 +30,15 @@ body {
 .inline {  
     display: inline;
 }
+
+.upgrade-button {
+    margin-right: 100px;
+}
+
+.float-right {
+    float: right;
+}
+
+.upgrade {
+    margin-bottom: 5px;
+}
