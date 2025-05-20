@@ -1,6 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
+    font-size: 1vw;
 }
 
 body {
@@ -17,6 +18,7 @@ body {
 
 .ui {
     width: calc(29vw);
+    /* padding-right: 30vw; */
     float: left;
 }
 
@@ -41,4 +43,21 @@ body {
 
 .upgrade {
     margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+#spawn-plinko-button {
+    position: absolute;
+    bottom: 0px;
+    padding: 5vh 10.55vw;
+    font-size: 1.435vw; 
+}
+
+.label {
+   font-size: 2vw;
+}
+
+#money_counter {
+    position: absolute;
+    bottom: 14.5vh;
 }

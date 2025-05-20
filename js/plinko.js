@@ -89,7 +89,7 @@ class Rect {
 }
 
 function update_money_display() {
-    money_display.innerText = "Money: " + money;
+    money_display.innerText = "Money: $" + money.toFixed(2);
 }
 
 let money_display = document.getElementById("money_counter");

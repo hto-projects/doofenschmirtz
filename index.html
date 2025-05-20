@@ -10,9 +10,10 @@
     <canvas id="gameboard"></canvas>
     <span id="bucket_container"></span>
     <div class="ui">
-        <h2 id="money_counter">Money: </h2>
-        <button onclick="spawn_plinko()">Spawn plinko</button>
+        <h2 class="label" id="upgrades_label">Upgrades:</h2>
         <div id="upgrades-div"></div> <!-- gets populated by js -->
+        <h2 class="label" id="money_counter">Money: $0</h2>
+        <button id="spawn-plinko-button" onclick="spawn_plinko()">Spawn Plinko</button>
     </div>
 
     <script src="../js/upgrades.js"></script>
